@@ -11,17 +11,18 @@ class User
 
     public function createUser($username, $email, $password)
     {
-        $query = "INSERT INTO user_tbl (username, email, join_at) VALUES (:username, :email, NOW())";
+        $query = "INSERT INTO users (username, email, password) VALUES (:username, :email, :password)";
         $stmt = $this->db->conn->prepare($query);
         $stmt->bindParam(':username', $username);
         $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':password', $password);
         $result = $stmt->execute();
         return $result;
     }
 
     public function getUsers()
     {
-        $query = "SELECT * FROM user_tbl";
+        $query = "SELECT * FROM users";
         $stmt = $this->db->conn->query($query);
         $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $users;
@@ -29,18 +30,19 @@ class User
 
     public function updateUser($id, $username, $email, $password)
     {
-        $query = "UPDATE user_tbl SET username=:username, email=:email WHERE id=:id";
+        $query = "UPDATE users SET username=:username, email=:email, password=:password WHERE id=:id";
         $stmt = $this->db->conn->prepare($query);
         $stmt->bindParam(':id', $id);
         $stmt->bindParam(':username', $username);
         $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':password', $password);
         $result = $stmt->execute();
         return $result;
     }
 
     public function deleteUser($id)
     {
-        $query = "DELETE FROM user_tbl WHERE id=:id";
+        $query = "DELETE FROM users WHERE id=:id";
         $stmt = $this->db->conn->prepare($query);
         $stmt->bindParam(':id', $id);
         $result = $stmt->execute();

@@ -9,7 +9,7 @@ class Database
     // private $database = "test_pck";
     public $conn;
 
-    public function __construct()
+    public function __construct($host, $username, $password, $database)
     {
         try {
             $this->conn = new PDO("mysql:host=$this->host;dbname=$this->database", $this->username, $this->password);

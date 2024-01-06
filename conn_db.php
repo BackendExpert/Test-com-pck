@@ -8,4 +8,4 @@
  $database = "test_pck";
 
 
-
+$dbp = Database($host, $username, $password, $database);

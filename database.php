@@ -2,11 +2,13 @@
 
 class Database
 {
-    private $host = "localhost";
-    private $username = "root";
-    private $password = "";
-    private $database = "test_pck";
-    public $conn;
+    // private $host = "localhost";
+    // private $username = "root";
+    // private $password = "";
+    // private $database = "test_pck";
+    // public $conn;
+
+    
 
     public function __construct()
     {

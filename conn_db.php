@@ -7,3 +7,4 @@ $dbConfig = array(
     'database' => 'test_pck',
     'charset' => 'utf8mb4',
 );
+

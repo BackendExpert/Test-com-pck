@@ -6,17 +6,17 @@ include 'user.php';
 $crud = new Crud($dbConfig);
 
 
-$username = 'john_doe';
-$email = 'john.doe@example.com';
-$crud->create($username, $email);
+// $username = 'john_doe';
+// $email = 'john.doe@example.com';
+// $crud->create($username, $email);
 
 //-------------------------
-$users = $crud->read();
-echo "Read all users:\n";
-print_r($users);
+// $users = $crud->read();
+// echo "Read all users:\n";
+// print_r($users);
 
 // //-------------------------------
-// $userToUpdate = 1; 
+// $userToUpdate = 5; 
 // $newUsername = 'updated_john_doe';
 // $newEmail = 'updated.john.doe@example.com';
 // $crud->update($userToUpdate, $newUsername, $newEmail);
@@ -28,9 +28,9 @@ print_r($users);
 // //--------------------------
 
 
-// $userToDelete = 2; 
-// $crud->delete($userToDelete);
+$userToDelete = 8; 
+$crud->delete($userToDelete);
 
-// $remainingUsers = $crud->read();
-// echo "Read all users after delete:\n";
-// print_r($remainingUsers);
+$remainingUsers = $crud->read();
+echo "Read all users after delete:\n";
+print_r($remainingUsers);

@@ -20,6 +20,8 @@ class Database
         $this->database = $config['database'];
         $this->charset = $config['charset'];
 
+
+
         $this->connect();
     }
 

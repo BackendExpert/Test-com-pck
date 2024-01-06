@@ -1,6 +1,7 @@
 <?php
 
 include 'conn_db.php';
+include 'database.php';
 
 class Crud
 {

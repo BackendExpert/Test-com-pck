@@ -1,40 +1,45 @@
 <?php
 
+// Include the database configuration file
+include 'conn_db.php';
+
 class Database
 {
-    // private $host;
-    // private $username;
-    // private $password;
-    // private $database;
-    public $conn;
+    private $host;
+    private $username;
+    private $password;
+    private $database;
+    private $charset;
+    private $pdo;
 
-    public function __construct($host, $username, $password, $database)
+    public function __construct($config)
     {
-        $this->host = $host;
-        $this->dbname = $dbname;
-        $this->username = $username;
-        $this->password = $password;
+        $this->host = $config['host'];
+        $this->username = $config['username'];
+        $this->password = $config['password'];
+        $this->database = $config['database'];
+        $this->charset = $config['charset'];
+
         $this->connect();
     }
 
-    public function connect()
+    private function connect()
     {
+        $dsn = "mysql:host={$this->host};dbname={$this->database};charset={$this->charset}";
+
         try {
-            $this->conn = new PDO("mysql:host=$this->host;dbname=$this->database", $this->username, $this->password);
-            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $this->pdo = new PDO($dsn, $this->username, $this->password);
+            // Set PDO to throw exceptions for errors
+            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            // Optionally, set additional PDO attributes if needed
+            // $this->pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            echo "Connection failed: " . $e->getMessage();
+            die("Connection failed: " . $e->getMessage());
         }
     }
 
     public function getConnection()
     {
-        return $this->conn;
-    }
-
-    public function closeConnection()
-    {
-        $this->conn = null;
+        return $this->pdo;
     }
 }
-?>

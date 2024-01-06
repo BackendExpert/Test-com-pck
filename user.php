@@ -1,52 +1,61 @@
 <?php
 
-class User
-{
-    private $db;
+include 'config.php';
 
-    public function __construct($db)
+class Crud
+{
+    private $pdo;
+
+    public function __construct($config)
     {
-        $this->db = $db;
+        $databaseConnection = new Database($config);
+        $this->pdo = $databaseConnection->getConnection();
     }
 
-    public function createUser($username, $email, $password)
+    public function create($username, $email)
     {
-        $query = "INSERT INTO users (username, email, password) VALUES (:username, :email, :password)";
-        $stmt = $this->db->conn->prepare($query);
+        $query = "INSERT INTO users (username, email) VALUES (:username, :email)";
+        $stmt = $this->pdo->prepare($query);
+
+        // Bind parameters
         $stmt->bindParam(':username', $username);
         $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':password', $password);
-        $result = $stmt->execute();
-        return $result;
+
+        // Execute the query
+        return $stmt->execute();
     }
 
-    public function getUsers()
+    public function read()
     {
         $query = "SELECT * FROM users";
-        $stmt = $this->db->conn->query($query);
-        $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $users;
+        $stmt = $this->pdo->query($query);
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function updateUser($id, $username, $email, $password)
+    public function update($id, $username, $email)
     {
-        $query = "UPDATE users SET username=:username, email=:email, password=:password WHERE id=:id";
-        $stmt = $this->db->conn->prepare($query);
-        $stmt->bindParam(':id', $id);
+        $query = "UPDATE users SET username = :username, email = :email WHERE id = :id";
+        $stmt = $this->pdo->prepare($query);
+
+        // Bind parameters
         $stmt->bindParam(':username', $username);
         $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':password', $password);
-        $result = $stmt->execute();
-        return $result;
+        $stmt->bindParam(':id', $id);
+
+        // Execute the query
+        return $stmt->execute();
     }
 
-    public function deleteUser($id)
+    public function delete($id)
     {
-        $query = "DELETE FROM users WHERE id=:id";
-        $stmt = $this->db->conn->prepare($query);
+        $query = "DELETE FROM users WHERE id = :id";
+        $stmt = $this->pdo->prepare($query);
+
+        // Bind parameters
         $stmt->bindParam(':id', $id);
-        $result = $stmt->execute();
-        return $result;
+
+        // Execute the query
+        return $stmt->execute();
     }
 }
-?>

@@ -1,12 +1,11 @@
 <?php
 
-
 class Database
 {
-    // private $host = "localhost";
-    // private $username = "root";
-    // private $password = "";
-    // private $database = "test_pck";
+    // private $host;
+    // private $username;
+    // private $password;
+    // private $database;
     public $conn;
 
     public function __construct($host, $username, $password, $database)

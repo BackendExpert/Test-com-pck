@@ -1,11 +1,9 @@
 <?php
 
-define ('HOST_DB','localhost');
-define ('HOST_USER','root');
-define ('HOST_PASS','');
-define ('HOST_DBNAME','test_pck');
-
-include_once('db_con.php');
-$dbc = new DatabaseConn;
-
-?>
+$dbConfig = array(
+    'host' => 'localhost',
+    'username' => 'root',
+    'password' => '',
+    'database' => 'test_pck',
+    'charset' => 'utf8mb4',
+);

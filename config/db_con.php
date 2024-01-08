@@ -27,10 +27,7 @@ class Database
 
         try {
             $this->pdo = new PDO($dsn, $this->username, $this->password);
-            // Set PDO to throw exceptions for errors
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            // Optionally, set additional PDO attributes if needed
-            // $this->pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             die("Connection failed: " . $e->getMessage());
         }

@@ -2,13 +2,20 @@
 
     class DatabaseConn
     {
-        public function __construct(){
-            $con = mysqli_connect(HOST_DB,HOST_USER,HOST_PASS,HOST_DBNAME);
+        private $host = "HOST_DB";
+        private $username = "HOST_USER";
+        private $password = "HOST_PASS";
+        private $database = "HOST_DBNAME";
+        public $con;
 
-            if(!$con){
-                die("Connection Lost");
+        public function __construct(){
+            try{
+                $this->con = new PDO("mysql:host=$this->host;dbname=$this->database", $this->username, $this->password);
+                $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             }
-            return $this->con = $con;
+            catch (PDOException $e){
+                echo "Connection Faild:". $e->getMessage();
+            }
         }
     }
 
